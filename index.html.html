@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/logo.png">
+
+<link rel="apple-touch-icon" sizes="180x180" href="img/logo.png">
+
+<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+
+
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSEU Insiders | Student Community Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-blue': '#1e3a8a',
+                        'secondary-gray': '#f0f2f5',
+                        'accent-orange': '#f97316',
+                        'soft-white': '#ffffff',
+                        'dark-text': '#1f2937',
+                        'muted-border': '#d1d5db',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-welcome-heading {
+        animation: fadeInUp 1s ease-out forwards;
+    }
+
+    /* --- New Slider Styles --- */
+    .slider-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto 2rem auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .slider-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+    }
+    .slide img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+    }
+    .slider-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: background-color 0.2s;
+    }
+    .slider-button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    .slider-button.prev {
+        left: 1rem;
+    }
+    .slider-button.next {
+        right: 1rem;
+    }
+    .slider-dots {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.5rem;
+    }
+    .dot {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .dot.active {
+        background-color: white;
+        transform: scale(1.2);
+    }
+
+    /* Adjusted Hero Section */
+    #hero {
+        padding: 3rem 1.5rem; /* Increased padding */
+        background-color: #e8f0fe; /* Light blue background */
+        min-height: 100vh; /* Ensure it fills the viewport height */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Move content slightly upward */
+        align-items: center;
+    }
+
+    .slider-container {
+        max-height: 350px; /* Increased banner height */
+        width: 100%;
+        overflow: hidden;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .slider-container img {
+        height: 100%; /* Ensure images fit the container */
+        width: 100%;
+        object-fit: cover; /* Prevent zooming */
+    }
+
+    .animate-welcome-heading {
+        font-size: 3rem; /* Increased font size */
+        line-height: 1.3;
+        margin-top: 1rem; /* Add spacing above */
+    }
+
+    #hero p {
+        font-size: 1.25rem; /* Increased description text size */
+        margin-bottom: 1.5rem;
+    }
+
+    #hero .btn-primary {
+        padding: 1rem 2rem; /* Increased button size */
+        font-size: 1.125rem;
+    }
+
+    /* Adjust spacing for smaller screens */
+    @media (max-width: 768px) {
+        .slider-container {
+            max-height: 250px;
+        }
+
+        .slider-container img {
+            height: 100%; /* Ensure images fit the container */
+        }
+
+        .animate-welcome-heading {
+            font-size: 2.5rem;
+        }
+
+        #hero p {
+            font-size: 1.125rem;
+        }
+
+        #hero .btn-primary {
+            font-size: 1rem;
+        }
+    }
+</style>
+</head>
+
+<body class="bg-secondary-gray text-dark-text font-poppins">
+
+    <header class="bg-soft-white text-dark-text sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="img/logo.png" alt="DSEU Insiders Logo" class="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-muted-border" />
+                <h1 class="text-xl md:text-2xl font-bold">
+                 <span class="text-primary-blue">DSEU</span> <span class="text-accent-orange">Insiders</span>
+                </h1>
+            </div>
+            <nav class="hidden lg:flex gap-8 font-medium" aria-label="Main Navigation">
+                <a href="#updates-announcements" class="header-link">Updates</a>
+                <a href="#about" class="header-link">About</a>
+                <a href="#features" class="header-link">Features</a>
+                <a href="#courses" class="header-link">Courses</a>
+                <a href="#community" class="header-link">Community</a>
+                <a href="#connect" class="header-link">Connect</a>
+            </nav>
+            <div class="lg:hidden">
+                <button id="menuBtn" aria-label="Open main menu" aria-expanded="false" aria-controls="mobileMenu"
+                    class="p-2 rounded-md text-dark-text hover:bg-secondary-gray focus:outline-none focus:ring-2 focus:ring-primary-blue transition">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <a href="login.html" id="authButton" class="btn-primary-small hidden lg:block">Login</a>
+        </div>
+         <div id="mobileMenu"
+            class="hidden lg:hidden bg-soft-white text-dark-text border-t border-muted-border px-6 py-4"
+            role="navigation" aria-label="Mobile Navigation">
+            <a href="#updates-announcements" class="block py-3 font-semibold hover:text-accent-orange transition">Updates</a>
+            <a href="#about" class="block py-3 font-semibold hover:text-accent-orange transition">About</a>
+            <a href="#features" class="block py-3 font-semibold hover:text-accent-orange transition">Features</a>
+            <a href="#courses" class="block py-3 font-semibold hover:text-accent-orange transition">Courses</a>
+            <a href="#community" class="block py-3 font-semibold hover:text-accent-orange transition">Community</a>
+            <a href="#connect" class="block py-3 font-semibold hover:text-accent-orange transition">Connect</a>
+            <div class="flex flex-col gap-4 mt-4">
+                <a href="login.html" id="authButtonMobile" class="block text-center py-3 px-4 font-semibold text-soft-white bg-accent-orange rounded-md hover:bg-blue-700 transition">Login</a>
+                <p class="text-center text-sm text-gray-600">Don't have an account? <a href="login.html" class="text-accent-orange font-semibold hover:underline">Sign Up</a></p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="text-center px-6 bg-secondary-gray flex flex-col justify-center items-center">
+    <div class="slider-container mb-6">
+        <div class="slider-track">
+            <div class="slide"><img src="img/event-poster-1.jpg" alt="Description of first banner"></div>
+            <div class="slide"><img src="img/event-poster-2.jpg" alt="Description of second banner"></div>
+            <div class="slide"><img src="img/event-poster-3.jpg" alt="Description of third banner"></div>
+        </div>
+        <button class="slider-button prev">&#10094;</button>
+        <button class="slider-button next">&#10095;</button>
+        <div class="slider-dots"></div>
+    </div>
+    <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-primary-blue animate-welcome-heading">
+            Welcome to <span class="text-accent-orange">DSEU Insiders</span>
+        </h2>
+        <p class="text-base md:text-lg mb-6 text-gray-700">
+            Empowering the DSEU student community with knowledge, connection, and resources.
+        </p>
+        <a href="#courses" class="btn-primary">Go Through Latest Courses</a>
+    </div>
+</section>
+
+        <section id="updates-announcements" class="py-16 bg-soft-white px-4 md:px-0 fade-in-section">
+            <div class="max-w-5xl mx-auto bg-soft-white rounded-xl shadow-lg border border-muted-border p-8 md:p-12 lg:p-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-8 text-center border-b-2 border-accent-orange pb-2 inline-block mx-auto">
+                    Updates & <span class="text-accent-orange">Announcements</span>
+                </h2>
+                <div class="updates-container relative h-96 overflow-hidden">
+                    <div class="updates-content-wrapper" id="updatesContentWrapper">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 bg-secondary-gray px-4 md:px-0 fade-in-section">
+            <div class="max-w-5xl mx-auto p-8 md:p-12 lg:p-16 rounded-xl shadow-lg border border-muted-border grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-4 border-b-2 border-accent-orange pb-2 inline-block">
+                        About <span class="text-accent-orange">DSEU Insiders</span>
+                    </h2>
+                    <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
+                        An independent student community platform built by and for DSEU students. Our mission is to empower every student at Delhi Skill and Entrepreneurship University by providing easy access to academic resources, real campus reviews, and a vibrant peer community.
+                    </p>
+                    <ul class="list-none pl-0 text-gray-700 space-y-3 text-base">
+                        <li class="flex items-start"><span class="text-accent-orange mr-3 mt-1">✓</span> Find and share notes, previous year question papers, and results.</li>
+                        <li class="flex items-start"><span class="text-accent-orange mr-3 mt-1">✓</span> Read honest reviews and experiences from students across all DSEU campuses.</li>
+                        <li class="flex items-start"><span class="text-accent-orange mr-3 mt-1">✓</span> Connect, collaborate, and share anonymously through our confession wall and community channels.</li>
+                        <li class="flex items-start"><span class="text-accent-orange mr-3 mt-1">✓</span> Stay updated with the latest news, events, and opportunities at DSEU.</li>
+                    </ul>
+                    <p class="mt-4 text-gray-500 text-sm italic">
+                        This is an unofficial platform, created by students to help fellow students thrive at DSEU.
+                    </p>
+                </div>
+                <div class="flex justify-center items-center">
+                    <div class="p-8 bg-soft-white rounded-xl shadow-inner">
+                        <img src="img/image.png" alt="DSEU Insiders Logo" class="w-64 h-64 md:w-80 md:h-80 object-contain" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-16 bg-soft-white px-4 md:px-0 fade-in-section">
+            <div class="max-w-6xl mx-auto rounded-xl shadow-lg border border-muted-border p-8 md:p-12 lg:p-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-8 text-center border-b-2 border-accent-orange pb-2 inline-block mx-auto">
+                    Platform <span class="text-accent-orange">Features</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <a href="syllabus.html" class="feature-card">
+                        <span class="text-4xl">📖</span>
+                        <h3 class="text-xl font-semibold">Syllabus</h3>
+                        <p class="text-gray-600">Semester & program-wise syllabus access.</p>
+                    </a>
+                    <button type="button" onclick="showMaintenance()" class="feature-card">
+                        <span class="text-4xl">📝</span>
+                        <h3 class="text-xl font-semibold">Notes</h3>
+                        <p class="text-gray-600">Semester-wise downloadable notes.</p>
+                    </button>
+                    <button type="button" onclick="showMaintenance()" class="feature-card">
+                        <span class="text-4xl">❓</span>
+                        <h3 class="text-xl font-semibold">PYQs</h3>
+                        <p class="text-gray-600">Previous year question papers for all programs.</p>
+                    </button>
+                    <a href="https://forms.gle/vT9bxRNLy4c4Rrsc7" target="_blank" rel="noopener" class="feature-card">
+                        <span class="text-4xl">🤫</span>
+                        <h3 class="text-xl font-semibold">Confession Forms</h3>
+                        <p class="text-gray-600">Anonymous sharing platform to speak your mind freely.</p>
+                    </a>
+                    <a href="#" class="feature-card" onclick="openHelpdeskModal()">
+                        <span class="text-4xl">🤝</span>
+                        <h3 class="text-xl font-semibold">Student Helpdesk</h3>
+                        <p class="text-gray-600">Get peer support for doubts, ERP, admission or exams.</p>
+                    </a>
+                    <a href="https://dseu.ac.in/" target="_blank" rel="noopener" class="feature-card">
+                        <span class="text-4xl">🌐</span>
+                        <h3 class="text-xl font-semibold">University Website</h3>
+                        <p class="text-gray-600">Visit DSEU’s official site for latest university-wide announcements.</p>
+                    </a>
+                    <a href="https://dseu.ac.in/admission" target="_blank" rel="noopener" class="feature-card">
+                        <span class="text-4xl">✍️</span>
+                        <h3 class="text-xl font-semibold">Admission Form</h3>
+                        <p class="text-gray-600">Apply for diploma, undergraduate or postgraduate programs.</p>
+                    </a>
+                    <a href="https://dseu.samarth.edu.in/index.php/site/login" target="_blank" rel="noopener" class="feature-card">
+                        <span class="text-4xl">🔑</span>
+                        <h3 class="text-xl font-semibold">Student Login Portal</h3>
+                        <p class="text-gray-600">Log in to view, register and download your results.</p>
+                    </a>
+                    
+                    <div class="relative feature-card group">
+                        <div class="campus-initial-content">
+                            <span class="text-4xl">🏛️</span>
+                            <h3 class="text-xl font-semibold">Campuses</h3>
+                            <p class="text-gray-600">Explore DSEU campuses zone-wise across Delhi.</p>
+                        </div>
+                        
+                        <div class="campus-card-overlay">
+                            <p class="text-primary-blue font-semibold mb-3">Select Zone:</p>
+                            <div class="grid grid-cols-3 gap-3 w-full">
+                                <a href="https://dseu.ac.in/campus/zone/central%20zone" target="_blank" rel="noopener" class="campus-zone-button">Central</a>
+                                <a href="https://dseu.ac.in/campus/zone/north%20zone" target="_blank" rel="noopener" class="campus-zone-button">North</a>
+                                <a href="https://dseu.ac.in/campus/zone/south%20zone" target="_blank" rel="noopener" class="campus-zone-button">South</a>
+                                <a href="https://dseu.ac.in/campus/zone/east%20zone" target="_blank" rel="noopener" class="campus-zone-button">East</a>
+                                <a href="https://dseu.ac.in/campus/zone/west%20zone" target="_blank" rel="noopener" class="campus-zone-button">West</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses" class="py-16 bg-secondary-gray px-4 md:px-0 fade-in-section">
+            <div class="max-w-5xl mx-auto rounded-xl shadow-lg border border-muted-border p-8 md:p-12 lg:p-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-12 text-center border-b-2 border-accent-orange pb-2 inline-block mx-auto">
+                    Courses & <span class="text-accent-orange">Batches</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+                    
+                    <div class="flex justify-center">
+                        <img 
+                            src="img/dseu-admissions-batch-poster.jpg" 
+                            alt="DSEU students collaborating and studying online" 
+                            class="rounded-lg shadow-xl w-full max-w-sm h-auto transition-transform duration-300 hover:scale-105"
+                            loading="lazy"
+                        >
+                    </div>
+                    
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-dark-text mb-4">Excel in Your Academics</h3>
+                        <p class="text-base text-gray-700 mb-8 leading-relaxed">
+                            Our expert-designed courses help you master every concept in depth. From theory to practicals and viva preparation to placement readiness, we guide you at every step to ensure you achieve your academic and career goals with confidence.
+                        </p>
+                        
+                        <div class="mt-4">
+                            <a href="login.html" id="courseActionButton" class="btn-primary">
+                                Login to Explore
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="community" class="py-16 px-4 bg-soft-white fade-in-section">
+            <div class="max-w-5xl mx-auto rounded-xl shadow-lg border border-muted-border p-8 md:p-12 lg:p-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6 text-center border-b-2 border-accent-orange pb-2 inline-block mx-auto">
+                    Our <span class="text-accent-orange">Community</span>
+                </h2>
+                <p class="text-base text-gray-600 mb-10 text-center max-w-3xl mx-auto">
+                    DSEU Insiders is more than just a platform — it’s a student-led initiative offering mentorship, guidance, and resources to help every student grow.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="community-card">
+                        <span class="text-4xl">🧑‍🏫</span>
+                        <h3 class="text-xl font-bold">Peer Mentorship</h3>
+                        <p class="text-gray-600">We connect juniors with seniors to guide them in academics, career paths, and personal development.</p>
+                    </div>
+                    <div class="community-card">
+                        <span class="text-4xl">📣</span>
+                        <h3 class="text-xl font-bold">Latest Updates</h3>
+                        <p class="text-gray-600">Stay informed with real-time updates on exams, results, ERP, and university notifications.</p>
+                    </div>
+                    <div class="community-card">
+                        <span class="text-4xl">▶️</span>
+                        <h3 class="text-xl font-bold">Video Lectures</h3>
+                        <p class="text-gray-600">Access video-based learning content, revision series, and topic-wise explanations shared by peers.</p>
+                    </div>
+                    <div class="community-card">
+                        <span class="text-4xl">📚</span>
+                        <h3 class="text-xl font-bold">Academic Support</h3>
+                        <p class="text-gray-600">From notes to PYQs, we help students academically with organized and easily accessible study materials.</p>
+                    </div>
+                    <div class="community-card">
+                        <span class="text-4xl">🗓️</span>
+                        <h3 class="text-xl font-bold">Events & Workshops</h3>
+                        <p class="text-gray-600">We organize online and offline student-led events, workshops, and community challenges.</p>
+                    </div>
+                    <div class="community-card">
+                        <span class="text-4xl">❤️</span>
+                        <h3 class="text-xl font-bold">Helping Every Student</h3>
+                        <p class="text-gray-600">Our goal is to be the first place students turn to for help, support, and collaboration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="connect" class="py-16 px-6 bg-secondary-gray fade-in-section">
+            <div class="max-w-4xl mx-auto text-center rounded-xl shadow-lg border border-muted-border p-8 md:p-12 lg:p-16">
+                <h2 class="text-3xl font-bold text-primary-blue mb-4 border-b-2 border-accent-orange pb-2 inline-block">Connect With Us</h2>
+                <p class="text-lg text-gray-600 mb-8">Join our student-run channels and stay updated with the latest from DSEU Insiders.</p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="https://www.instagram.com/dseuinsiders?igsh=cHJ5MGNnODNqOHl2" target="_blank" rel="noopener" class="social-link instagram">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 2.75a5.75 5.75 0 1 1 0 11.5 5.75 5.75 0 0 1 0-11.5zm0 1.5a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zm6.13.88a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
+                        Instagram
+                    </a>
+                    <a href="https://youtube.com/@dseuinsiders?si=Sn4xlYl2T2eOVfoN" target="_blank" rel="noopener" class="social-link youtube">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M21.8 8.001a2.75 2.75 0 0 0-1.94-1.94C18.2 6 12 6 12 6s-6.2 0-7.86.06a2.75 2.75 0 0 0-1.94 1.94C2 9.7 2 12 2 12s0 2.3.2 3.999a2.75 2.75 0 0 0 1.94 1.94C5.8 18 12 18 12 18s6.2 0 7.86-.06a2.75 2.75 0 0 0 1.94-1.94C22 14.3 22 12 22 12s0-2.3-.2-3.999zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+                        YouTube
+                    </a>
+                    <a href="https://chat.whatsapp.com/JdBwapuQ44YI0VN8il029A" target="_blank" rel="noopener" class="social-link whatsapp">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A12.07 12.07 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.11 1.51 5.83L0 24l6.34-1.66A11.98 11.98 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.19-1.25-6.18-3.48-8.52zM12 22c-1.85 0-3.62-.5-5.13-1.37l-.36-.21-3.76.99 1-3.66-.23-.37A9.97 9.97 0 0 1 2 12c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10zm5.2-7.8c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.51.14-.17.18-.29.27-.48.09-.19.05-.36-.02-.5-.07-.14-.61-1.47-.83-2.02-.22-.55-.45-.47-.62-.48-.16-.01-.36-.01-.56-.01-.2 0-.52.07-.8.34-.28.27-1.06 1.04-1.06 2.53 0 1.49 1.08 2.93 1.23 3.13.15.2 2.13 3.25 5.18 4.43.72.29 1.28.46 1.72.59.72.23 1.38.2 1.9.12.58-.09 1.65-.67 1.89-1.32.24-.65.24-1.2.17-1.32-.07-.12-.25-.19-.53-.33z"/></svg>
+                        WhatsApp
+                    </a>
+                    <a href="https://t.me/dseuinsiders" target="_blank" rel="noopener" class="social-link telegram">
+                        <svg class="w-7 h-7" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="120" cy="120" r="120" fill="#229ED9"/>
+                            <path d="M179.6 72.8c2.1-9.6-3.5-13.4-12.2-10.5L56.2 108.7c-8.7 3-8.6 7.2-1.5 9.1l30.2 8.4 11.6 36.2c1.6 4.5 2.8 6.2 5.7 6.2 2.9 0 4-1.1 5.6-4.5l15.6-31.7 32.5 24c6 4.1 10.3 2 11.8-5.6l20.9-78.8z" fill="#fff"/>
+                        </svg>
+                        Telegram
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-primary-blue text-soft-white py-8 text-center">
+        <p class="text-sm md:text-base mb-2">© 2025 DSEU Insiders. All rights reserved.</p>
+        <p class="text-xs md:text-sm opacity-80">Built by students, for students. Unofficial and community-supported.</p>
+        <p class="text-xs opacity-70 italic mt-4">This web page is built and designed by Sudhansh Shukla.</p>
+    </footer>
+
+    <div id="helpdeskModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="helpdeskModalTitle">
+        <div class="modal-content">
+            <button type="button" class="close-btn" id="closeHelpdeskModal" aria-label="Close helpdesk dialog">×</button>
+            <h3 id="helpdeskModalTitle" class="text-2xl font-bold text-primary-blue mb-6 text-center">Student Help & Support</h3>
+
+            <div class="mb-8 p-4 bg-secondary-gray rounded-md">
+                <h4 class="text-xl font-semibold text-primary-blue mb-3 flex items-center">
+                    <span class="text-accent-orange text-2xl mr-2">ℹ️</span>
+                    DSEU Official Queries
+                </h4>
+                <p class="text-gray-700 mb-2">For university-related problems (e.g., admissions, exams, ERP issues), please contact DSEU directly:</p>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                    <li>Email: <a href="mailto:helpdesk@dseu.ac.in" class="text-blue-600 hover:underline">helpdesk@dseu.ac.in</a></li>
+                    <li>Visit Headquarters: <span class="font-medium">Delhi Skill and Entrepreneurship University, Sector-9, Dwarka, New Delhi- 110077</span></li>
+                </ul>
+            </div>
+
+            <div class="p-4 bg-secondary-gray rounded-md">
+                <h4 class="text-xl font-semibold text-primary-blue mb-3 flex items-center">
+                    <span class="text-accent-orange text-2xl mr-2">🙋‍♀️</span>
+                    DSEU Insiders Queries
+                </h4>
+                <p class="text-gray-700 mb-2">For issues or feedback related to the DSEU Insiders platform itself, feel free to reach out to our team:</p>
+                <ul class="list-disc pl-5 text-gray-700">
+                    <li>Email: <a href="mailto:dseuinsiders@gmail.com" class="text-blue-600 hover:underline">dseuinsiders@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="courseDetailsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="courseModalTitle">
+        <div class="modal-content">
+            <button type="button" class="close-btn" id="closeCourseModal" aria-label="Close course details dialog">×</button>
+            <h3 id="courseModalTitle" class="text-2xl font-bold text-primary-blue mb-6 text-center"></h3>
+            
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8 pb-8 border-b border-muted-border">
+                <img id="courseModalPoster" src="" alt="Course Poster" class="w-full max-w-[280px] h-auto rounded-lg shadow-lg object-cover flex-shrink-0">
+                <div class="flex-grow text-center md:text-left">
+                    <p id="courseModalDescription" class="text-gray-700 text-lg leading-relaxed mb-6"></p>
+                    <div class="bg-accent-orange text-white py-3 px-8 rounded-lg inline-block shadow-lg">
+                        <span class="text-4xl font-extrabold" id="courseModalPrice"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h4 class="text-2xl font-bold text-primary-blue mb-4 flex items-center">
+                    <span class="text-accent-orange text-2xl mr-3">💡</span>
+                    Why Join?
+                </h4>
+                <p id="courseModalAudience" class="text-gray-700 text-base md:text-lg leading-relaxed"></p>
+            </div>
+
+            <div class="mb-10">
+                <h4 class="text-2xl font-bold text-primary-blue mb-4 flex items-center">
+                    <span class="text-accent-orange text-2xl mr-3">🎁</span>
+                    What You'll Get:
+                </h4>
+                <ul id="courseModalBenefits" class="list-none text-gray-700 space-y-3 text-base md:text-lg pl-0">
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <a id="courseModalBuyLink" href="#" target="_blank" rel="noopener" 
+                    class="inline-flex items-center justify-center bg-primary-blue text-white 
+                            px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-lg md:text-xl 
+                            hover:bg-blue-700 transition-colors shadow-lg transform hover:scale-105">
+                    Enroll Now
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="js/firebase-init.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.slider-track');
+            const slides = Array.from(track.children);
+            const nextButton = document.querySelector('.slider-button.next');
+            const prevButton = document.querySelector('.slider-button.prev');
+            const dotsNav = document.querySelector('.slider-dots');
+
+            const slideWidth = slides[0].getBoundingClientRect().width;
+
+            // Create dots
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dotsNav.appendChild(dot);
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+            });
+
+            const dots = Array.from(dotsNav.children);
+
+            const setSlidePosition = (slide, index) => {
+                slide.style.left = slideWidth * index + 'px';
+            };
+            slides.forEach(setSlidePosition);
+
+            let currentIndex = 0;
+
+            const updateSlide = () => {
+                track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentIndex].classList.add('active');
+            };
+
+            const goToSlide = (index) => {
+                currentIndex = index;
+                updateSlide();
+            };
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlide();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlide();
+            });
+
+            // Auto-slide functionality
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlide();
+            }, 5000); // Change slide every 5 seconds
+
+            // Adjust slide width on window resize
+            window.addEventListener('resize', () => {
+                const newSlideWidth = slides[0].getBoundingClientRect().width;
+                slides.forEach(setSlidePosition);
+                track.style.transition = 'none'; // Disable transition during resize
+                track.style.transform = 'translateX(-' + newSlideWidth * currentIndex + 'px)';
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.5s ease-in-out'; // Re-enable after resize
+                }, 50);
+            });
+
+            // Fix white space issue on mobile
+            track.style.width = `${slides.length * 100}%`; // Ensure track width matches total slides
+        });
+    </script>
+</body>
+</html>
